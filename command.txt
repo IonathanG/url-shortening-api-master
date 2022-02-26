@@ -1,0 +1,13 @@
+/* 
+npm init
+npm install sass -g
+sass -v
+
+  "scripts": {
+    "sass": "sass --watch ./scss/style.scss:./styles/style.css"
+  }
+
+$ npm config set prefix '~/.npm-global'
+$ export PATH=~/.npm-global/bin:$PATH
+
+npm run sass
