@@ -1,11 +1,11 @@
 @import url(https://fonts.google.com/specimen/Poppins);
-.footer__wrap, main .introduction__wrap, .main_header {
+.footer__wrap, main .boost__wrap, main .stats__wrap, main .shorten__wrap, main .introduction__wrap, .main_header {
   margin: 0 auto;
   padding: 0;
-  width: 85%;
+  width: 80%;
 }
 
-main .shorten-section, .main_header nav ul, .main_header {
+main .stats__wrap--header, main .shorten__wrap, .main_header nav ul, .main_header {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -55,7 +55,7 @@ body a {
   font-weight: 700;
   color: #9e9aa7;
 }
-@media (max-width: 840px) {
+@media (max-width: 980px) {
   .main_header nav li {
     display: none;
   }
@@ -70,6 +70,14 @@ body a {
 
 main {
   margin-top: 6em;
+}
+main .introduction {
+  position: relative;
+}
+main .introduction img {
+  position: absolute;
+  right: 0px;
+  top: -40px;
 }
 main .introduction__wrap--text {
   margin-bottom: 3rem;
@@ -96,28 +104,31 @@ main .introduction__wrap--link {
   background-color: #2acfcf;
   cursor: pointer;
 }
-main .shorten-section {
-  margin: 8em 0;
+main .shorten {
+  padding: 12rem 0;
   width: 100%;
+  background: linear-gradient(to bottom, #ffffff 0%, #ffffff 50%, #f0f1f7 50%, #f0f1f7 100%);
+}
+main .shorten__wrap {
   gap: 2rem;
   background-color: #3b3054;
   padding: 2.2rem 2rem;
   border-radius: 10px;
 }
-main .shorten-section input {
+main .shorten__wrap input {
   width: 80%;
   padding: 1rem 2rem;
   border-radius: 10px;
   font-size: 18px;
   color: #9e9aa7;
 }
-main .shorten-section input::placeholder {
+main .shorten__wrap input::placeholder {
   opacity: 0.8;
 }
-main .shorten-section input:focus {
+main .shorten__wrap input:focus {
   outline: none;
 }
-main .shorten-section button {
+main .shorten__wrap button {
   color: white;
   padding: 1.2rem 3rem;
   border-radius: 10px;
@@ -128,13 +139,83 @@ main .shorten-section button {
   border: none;
 }
 main .stats {
-  margin: 8em 0;
+  background-color: #f0f1f7;
+  width: 100%;
+  padding-bottom: 4rem;
+}
+main .stats__wrap--header {
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 4rem;
+  text-align: center;
+}
+main .stats__wrap--header h2 {
+  font-size: 2.5rem;
+}
+main .stats__wrap--header p {
+  line-height: 30px;
+  font-size: 1.2rem;
+  max-width: 50ch;
+  color: #9e9aa7;
+}
+main .stats__wrap__cards {
+  position: relative;
+  height: fit-content;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-column-gap: 2rem;
+}
+main .stats__wrap__cards--divider {
+  position: absolute;
+  width: 100%;
+  height: 10px;
+  top: 40%;
+  background-color: #2acfcf;
+  z-index: 0;
+}
+main .stats__wrap__cards--unit {
+  position: relative;
+  display: grid;
+  align-content: center;
+  justify-content: center;
+  padding: 0 1.5rem;
+  background-color: white;
+  height: 250px;
+  z-index: 1;
+}
+main .stats__wrap__cards--unit img {
+  position: absolute;
+  top: -15%;
+  left: 10%;
+  background-color: #3b3054;
+  height: 70px;
+  width: 70px;
+  padding: 10px;
+  border-radius: 50%;
+}
+main .stats__wrap__cards--unit h3 {
+  margin: 1rem 0;
+  font-size: 1.2rem;
+}
+main .stats__wrap__cards--unit p {
+  line-height: 30px;
+  font-size: 1rem;
+  max-width: 50ch;
+  color: #9e9aa7;
+}
+main .stats__wrap__cards--unit-2 {
+  margin-top: 40px;
+}
+main .stats__wrap__cards--unit-3 {
+  margin-top: 80px;
 }
 main .boost {
-  margin: 8em 0;
+  background-color: #3b3054;
+  padding: 2em 0;
+  width: 100%;
 }
-
 .footer {
+  padding: 2em 0;
   background-color: black;
   color: white;
 }

@@ -1,8 +1,13 @@
 %body-padding {
     margin: 0 auto;
     padding: 0;
-    width: 85%;
-}   
+    width: 80%;
+} 
+
+%flex {
+    display: flex;
+    justify-content: space-between;
+}
 
 %flex-center {
     display: flex;
