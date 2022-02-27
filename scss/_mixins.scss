@@ -1,0 +1,9 @@
+@mixin cyan_link($color, $padding, $border_radius, $background) {
+    color: $color;
+    padding: $padding;
+    border-radius: $border_radius;
+    background-color: $background;
+    cursor: pointer;
+}
+
+//@include grid();

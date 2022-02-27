@@ -1,6 +1,162 @@
+@import url(https://fonts.google.com/specimen/Poppins);
 @import './_variables';
 @import './_mixins';
 @import './_placeholders';
 
-//.attribution { font-size: 11px; text-align: center; }
-//.attribution a { color: hsl(228, 45%, 44%); }
+//-----------------------------
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+body {
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+
+        li {
+            list-style: none;
+        }
+        
+        a {
+            text-decoration: none;
+        }
+}
+
+
+
+//------------------HEADER------------------------
+
+.main_header {
+    @extend %flex-center;
+    @extend %body-padding;
+    padding-top: 2em;
+    flex-direction: row;
+
+    .logo {
+        padding-right: 30px;
+    }
+
+    nav {
+        width: 100%;
+        @extend %flex-space-between;
+
+        ul {
+            @extend %flex-center;
+        }
+
+            li {
+                cursor: pointer;
+                margin: 0 1.5rem;
+                font-size: $font_size;
+                font-family: 'Poppins', sans-serif;
+                font-weight: $big_weight;
+                color: $Grayish_Violet;
+
+                @media (max-width: 840px) {
+                    display: none;
+                  }
+            }
+
+            .header__signup {
+                @include cyan_link(white, 10px 20px, 20px, $Cyan);
+            }
+    }
+}
+
+//------------------------MAIN---------------------------
+
+main {
+    margin-top: 6em;
+
+    //*****FIRST SECTION*****
+    .introduction {
+        
+        &__wrap {
+            @extend %body-padding;
+         
+            &--text {
+                margin-bottom: 3rem;
+                max-width: 50%;
+                
+                h1 {
+                    font-size: 4.6em;
+                    opacity: 0.8;
+                    font-weight: $big_weight;
+                }
+                
+                p {
+                    line-height: 30px;
+                    max-width: 40ch;
+                    font-size: 1.4rem;
+                    color: $Grayish_Violet;
+                }
+            }
+            
+            &--link {
+                font-weight: $big_weight;
+                font-size: $font_size;
+                letter-spacing: 2px;
+                @include cyan_link(white, 15px 35px, 25px, $Cyan);
+            }
+        }
+    }
+
+
+    //*****SECOND SECTION*****
+    .shorten-section {
+        margin: 8em 0;
+        width: 100%;
+        @extend %flex-center;
+        gap: 2rem;
+        background-color: $Dark_Violet;
+        padding: 2.2rem 2rem;
+        border-radius: 10px;
+
+        input {
+            width: 80%;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-size: $font_size;
+            color: $Grayish_Violet;
+
+            &::placeholder {
+                opacity: 0.8;
+            }
+
+            &:focus {
+                outline: none;
+            }
+        }
+
+        button {
+            @include cyan_link(white, 1.2rem 3rem, 10px, $Cyan);
+            font-weight: $big_weight;
+            font-size: $font_size;
+            border: none;
+        }
+    }
+
+    //*****THIRD SECTION*****
+    .stats {
+        margin: 8em 0;
+    }
+
+
+    //*****FOURTH SECTION*****
+    .boost {
+        margin: 8em 0;
+    }
+}
+
+.footer {
+    background-color: black;
+    color: white;
+   
+    &__wrap {
+        @extend %body-padding;
+    }
+}

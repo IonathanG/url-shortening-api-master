@@ -1,3 +1,142 @@
+@import url(https://fonts.google.com/specimen/Poppins);
+.footer__wrap, main .introduction__wrap, .main_header {
+  margin: 0 auto;
+  padding: 0;
+  width: 85%;
+}
 
+main .shorten-section, .main_header nav ul, .main_header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main_header nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+body {
+  background-color: white;
+  width: 100%;
+  font-family: "Poppins", sans-serif;
+  min-height: 100vh;
+}
+body li {
+  list-style: none;
+}
+body a {
+  text-decoration: none;
+}
+
+.main_header {
+  padding-top: 2em;
+  flex-direction: row;
+}
+.main_header .logo {
+  padding-right: 30px;
+}
+.main_header nav {
+  width: 100%;
+}
+.main_header nav li {
+  cursor: pointer;
+  margin: 0 1.5rem;
+  font-size: 18px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  color: #9e9aa7;
+}
+@media (max-width: 840px) {
+  .main_header nav li {
+    display: none;
+  }
+}
+.main_header nav .header__signup {
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  background-color: #2acfcf;
+  cursor: pointer;
+}
+
+main {
+  margin-top: 6em;
+}
+main .introduction__wrap--text {
+  margin-bottom: 3rem;
+  max-width: 50%;
+}
+main .introduction__wrap--text h1 {
+  font-size: 4.6em;
+  opacity: 0.8;
+  font-weight: 700;
+}
+main .introduction__wrap--text p {
+  line-height: 30px;
+  max-width: 40ch;
+  font-size: 1.4rem;
+  color: #9e9aa7;
+}
+main .introduction__wrap--link {
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 2px;
+  color: white;
+  padding: 15px 35px;
+  border-radius: 25px;
+  background-color: #2acfcf;
+  cursor: pointer;
+}
+main .shorten-section {
+  margin: 8em 0;
+  width: 100%;
+  gap: 2rem;
+  background-color: #3b3054;
+  padding: 2.2rem 2rem;
+  border-radius: 10px;
+}
+main .shorten-section input {
+  width: 80%;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  font-size: 18px;
+  color: #9e9aa7;
+}
+main .shorten-section input::placeholder {
+  opacity: 0.8;
+}
+main .shorten-section input:focus {
+  outline: none;
+}
+main .shorten-section button {
+  color: white;
+  padding: 1.2rem 3rem;
+  border-radius: 10px;
+  background-color: #2acfcf;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 18px;
+  border: none;
+}
+main .stats {
+  margin: 8em 0;
+}
+main .boost {
+  margin: 8em 0;
+}
+
+.footer {
+  background-color: black;
+  color: white;
+}
 
 /*# sourceMappingURL=style.css.map */
