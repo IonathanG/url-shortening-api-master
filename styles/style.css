@@ -1,22 +1,21 @@
-@import url(https://fonts.google.com/specimen/Poppins);
-.footer__wrap, main .boost__wrap, main .stats__wrap, main .shorten__wrap, main .introduction__wrap, .main_header {
+.footer__wrap, main .boost__wrap, main .stats__wrap, main .result__wrap, main .shorten__wrap, main .introduction__wrap, .main_header {
   margin: 0 auto;
   padding: 0;
   width: 75%;
 }
 @media (max-width: 1120px) {
-  .footer__wrap, main .boost__wrap, main .stats__wrap, main .shorten__wrap, main .introduction__wrap, .main_header {
+  .footer__wrap, main .boost__wrap, main .stats__wrap, main .result__wrap, main .shorten__wrap, main .introduction__wrap, .main_header {
     width: 90%;
   }
 }
 
-main .boost__wrap, main .stats__wrap--header, main .shorten__wrap, .main_header .navbar .nav ul, .main_header .navbar {
+main .boost__wrap, main .stats__wrap--header, main .result__wrap__container, main .shorten__wrap, .main_header .navbar .nav ul, .main_header .navbar {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.main_header .navbar .nav {
+main .result__wrap, .main_header .navbar .nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -94,6 +93,7 @@ body li, body svg {
   color: white;
   padding: 10px 20px;
   border-radius: 20px;
+  border: none;
   background-color: #2acfcf;
   cursor: pointer;
   transition: 0.2s ease-in-out;
@@ -170,6 +170,7 @@ main {
 }
 main .introduction {
   position: relative;
+  padding-bottom: 4rem;
 }
 @media (max-width: 1350px) {
   main .introduction {
@@ -244,6 +245,7 @@ main .introduction__wrap--link {
   color: white;
   padding: 15px 35px;
   border-radius: 25px;
+  border: none;
   background-color: #2acfcf;
   cursor: pointer;
   transition: 0.2s ease-in-out;
@@ -253,7 +255,7 @@ main .introduction__wrap--link:hover {
 }
 main .shorten {
   margin-top: 5rem;
-  padding: 8rem 0;
+  padding: 2rem 0;
   width: 100%;
   background: linear-gradient(to bottom, white 0%, white 50%, #f0f1f7 50%, #f0f1f7 100%);
 }
@@ -289,6 +291,7 @@ main .shorten__wrap button {
   color: white;
   padding: 1.2rem 3rem;
   border-radius: 10px;
+  border: none;
   background-color: #2acfcf;
   cursor: pointer;
   transition: 0.2s ease-in-out;
@@ -311,10 +314,46 @@ main .shorten__wrap button:hover {
     width: 95%;
   }
 }
+main .result {
+  background-color: #f0f1f7;
+  width: 100%;
+  padding-bottom: 1rem;
+}
+main .result__wrap {
+  padding: 1rem 2rem;
+  margin-bottom: 2rem;
+  background-color: white;
+  font-size: 20px;
+}
+main .result__wrap--long {
+  color: black;
+}
+main .result__wrap__container {
+  gap: 2rem;
+}
+main .result__wrap__container--short {
+  color: #2acfcf;
+}
+main .result__wrap__container .copy {
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 5px;
+  border: none;
+  background-color: #2acfcf;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  font-size: 18px;
+}
+main .result__wrap__container .copy:hover {
+  background-color: #80e0e0;
+}
 main .stats {
   background-color: #f0f1f7;
   width: 100%;
-  padding-bottom: 6rem;
+  padding: 2rem 0 6rem 0;
+}
+main .stats__wrap {
+  margin-top: 4rem;
 }
 main .stats__wrap--header {
   flex-direction: column;
@@ -455,6 +494,7 @@ main .boost__wrap button {
   color: white;
   padding: 15px 35px;
   border-radius: 25px;
+  border: none;
   background-color: #2acfcf;
   cursor: pointer;
   transition: 0.2s ease-in-out;
