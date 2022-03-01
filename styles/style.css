@@ -10,13 +10,13 @@
   }
 }
 
-main .boost__wrap, main .stats__wrap--header, main .shorten__wrap, .main_header nav ul, .main_header {
+main .boost__wrap, main .stats__wrap--header, main .shorten__wrap, .main_header .navbar .nav ul, .main_header .navbar {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.main_header nav {
+.main_header .navbar .nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -44,39 +44,53 @@ body li, body svg {
 }
 
 .main_header {
-  flex-direction: row;
   padding-top: 2em;
 }
+.main_header .navbar {
+  flex-direction: row;
+}
 @media (max-width: 1120px) {
-  .main_header {
+  .main_header .navbar {
     justify-content: space-between;
   }
 }
-.main_header .logo {
+.main_header .navbar .logo {
   padding-right: 30px;
 }
-.main_header .menu-button {
-  display: none;
-}
-@media (max-width: 1120px) {
-  .main_header .menu-button {
-    display: block;
-  }
-}
-.main_header nav {
+.main_header .navbar .nav {
   width: 100%;
 }
-.main_header nav ul li {
+.main_header .navbar .nav ul li {
   margin: 0 1.5rem;
   font-size: 18px;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
   color: #9e9aa7;
 }
-.main_header nav ul li:hover:not(.header__signup) {
+.main_header .navbar .nav ul li:hover:not(.header__signup) {
   color: black;
 }
-.main_header nav ul .header__signup {
+@media (max-width: 1120px) {
+  .main_header .navbar .nav ul li {
+    padding: 1rem 0;
+    margin: 0.5rem;
+    font-size: 1.5rem;
+    color: white;
+  }
+}
+.main_header .navbar .nav ul .split {
+  display: none;
+  background-color: #9e9aa7;
+  padding: 0;
+  width: 90%;
+  height: 1px;
+}
+@media (max-width: 1120px) {
+  .main_header .navbar .nav ul .split {
+    display: block;
+  }
+}
+.main_header .navbar .nav ul .header__signup {
   color: white;
   padding: 10px 20px;
   border-radius: 20px;
@@ -84,13 +98,66 @@ body li, body svg {
   cursor: pointer;
   transition: 0.2s ease-in-out;
 }
-.main_header nav ul .header__signup:hover {
+.main_header .navbar .nav ul .header__signup:hover {
   background-color: #80e0e0;
 }
 @media (max-width: 1120px) {
-  .main_header nav {
-    display: none;
+  .main_header .navbar .nav ul .header__signup {
+    width: 50%;
   }
+}
+@media (max-width: 1120px) {
+  .main_header .navbar .nav ul {
+    flex-direction: column;
+    width: 90%;
+  }
+}
+@media (max-width: 1120px) {
+  .main_header .navbar .nav {
+    justify-content: center;
+    flex-direction: column;
+    position: fixed;
+    right: -100%;
+    top: 6rem;
+    height: 450px;
+    max-width: 90%;
+    border-radius: 10px;
+    text-align: center;
+    background-color: #3b3054;
+    transition: 0.3s;
+    box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+    z-index: 2;
+  }
+}
+.main_header .navbar .nav__active {
+  right: 6%;
+}
+.main_header .navbar .hamburger {
+  display: none;
+}
+@media (max-width: 1120px) {
+  .main_header .navbar .hamburger {
+    display: block;
+    cursor: pointer;
+  }
+}
+.main_header .navbar .hamburger .bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  background-color: #9e9aa7;
+}
+.main_header .navbar .hamburger__active .bar:nth-child(2) {
+  opacity: 0;
+}
+.main_header .navbar .hamburger__active .bar:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+.main_header .navbar .hamburger__active .bar:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
 }
 
 main {
@@ -401,7 +468,7 @@ main .boost__wrap button:hover {
   background-color: #232127;
   color: white;
 }
-@media (max-width: 1120px) {
+@media (max-width: 1220px) {
   .footer {
     padding-bottom: 1rem;
   }
@@ -410,7 +477,7 @@ main .boost__wrap button:hover {
   display: grid;
   grid-template-columns: 35% repeat(4, 1fr);
 }
-@media (max-width: 1350px) {
+@media (max-width: 1220px) {
   .footer__wrap {
     grid-template-columns: 1fr;
     grid-template-rows: repeat(5, 0.5fr);
@@ -424,12 +491,12 @@ main .boost__wrap button:hover {
 .footer__wrap--unit h4 {
   margin-bottom: 1.4rem;
 }
-@media (max-width: 1120px) {
+@media (max-width: 1220px) {
   .footer__wrap--unit h4 {
     margin-bottom: 1rem;
   }
 }
-@media (max-width: 1120px) {
+@media (max-width: 1220px) {
   .footer__wrap--unit ul {
     margin-bottom: 2.2rem;
   }
@@ -447,7 +514,7 @@ main .boost__wrap button:hover {
   flex-direction: row;
   gap: 5px;
 }
-@media (max-width: 1120px) {
+@media (max-width: 1220px) {
   .footer__wrap--links {
     margin-top: 1rem;
   }

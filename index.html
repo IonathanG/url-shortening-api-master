@@ -3,34 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=0.5">
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
   <link rel="stylesheet" href="styles/style.css">
   <title>Frontend Mentor | Shortly URL shortening API Challenge</title>
 
 </head>
 <body>
-<div class="body_wrap">
 
   <header class="main_header">
-    <div class="logo">
-      <img src="./images/logo.svg" alt="logo">
-    </div>
-    <div class="menu-button">|||</div>
-    <nav>
-      <ul>
-        <li>Features</li>
-        <li>Pricing</li>
-        <li>Resources</li>
-      </ul>
-      <ul>
-        <li>Login</li>
-        <li class="header__signup">Sign Up</li>
-      </ul>
-    </nav>
+    <navbar class="navbar">
+
+      <img class="logo" src="./images/logo.svg" alt="logo">
+      
+      <nav class="nav">
+        <ul class="nav-menu">
+          <li class="nav-item">Features</li>
+          <li class="nav-item">Pricing</li>
+          <li class="nav-item">Resources</li>
+        </ul>
+        <ul class="nav-menu">
+          <li class="split nav-item"></li>
+          <li class="nav-item">Login</li>
+          <li class="header__signup nav-item">Sign Up</li>
+        </ul>
+      </nav>
+
+      <div class="hamburger">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+
+    </navbar>
   </header>
 
   <main>
-
     <!--FIRST SECTION-->
     <div class="introduction">
       <img src="./images/illustration-working.svg" alt="illustration-working">
@@ -154,6 +162,6 @@
 
   </footer>
 
-</div>
+  <script src="index.js"></script>
 </body>
 </html>
