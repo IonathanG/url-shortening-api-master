@@ -3,6 +3,7 @@ const hamburger = document.querySelector('.hamburger');
 const shortBtn = document.getElementById('shorten-it');
 const linkInput = document.getElementById('linkInput');
 
+// class to fetch a new link
 class newLink {
     constructor(longLink) {
         this.longLink = longLink;
@@ -11,9 +12,13 @@ class newLink {
     //fetch the short link API
     fetch_shortLink = async () => {
         await fetch("https://api.shrtco.de/v2/shorten?url=" + this.longLink)
-        .then(response => (response.json()))
+        .then(response => {
+            if (response.ok) return response.json();
+            throw new Error();
+        })
         .then(data => this.shortLink = data.result.short_link)
-        .then(() => display.displayNewLink(this.longLink, this.shortLink));
+        .then(() => display.displayNewLink(this.longLink, this.shortLink))
+        .catch(() => display.displayError('Link is not valid'));
     }
 };
 
