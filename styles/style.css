@@ -37,7 +37,7 @@ body {
 body a {
   text-decoration: none;
 }
-body li, body svg {
+body li {
   cursor: pointer;
   transition: 0.3s ease-in-out;
 }
@@ -54,7 +54,7 @@ body li, body svg {
   }
 }
 .main_header .navbar .logo {
-  padding-right: 30px;
+  padding-right: -30px;
 }
 .main_header .navbar .nav {
   width: 100%;
@@ -178,7 +178,7 @@ main .introduction {
     flex-direction: column;
   }
 }
-main .introduction img {
+main .introduction__img {
   position: absolute;
   right: 10px;
   top: -40px;
@@ -186,7 +186,7 @@ main .introduction img {
   margin: 0 auto;
 }
 @media (max-width: 1350px) {
-  main .introduction img {
+  main .introduction__img {
     position: relative;
   }
 }
@@ -299,6 +299,7 @@ main .shorten__wrap--errorDisplay {
   display: none;
   position: absolute;
   color: #f46262;
+  font-style: italic;
   top: 75%;
   left: 4%;
 }
@@ -388,6 +389,23 @@ main .result__wrap__container .copied {
 }
 main .result__wrap__container .copied:hover {
   background-color: #4e416c;
+}
+main .result__wrap a:hover {
+  opacity: 0.7;
+}
+main .result__wrap--removeIcon {
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  right: -12px;
+  top: -10px;
+  fill: white;
+  background-color: #80e0e0;
+  cursor: pointer;
+  border-radius: 60%;
+}
+main .result__wrap--removeIcon:hover {
+  border: 2px solid #80e0e0;
 }
 @media (max-width: 840px) {
   main .result__wrap {
@@ -589,7 +607,7 @@ main .boost__wrap button:hover {
     text-align: center;
   }
 }
-.footer__wrap img {
+.footer__wrap--logo {
   filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(176deg) brightness(103%) contrast(100%);
 }
 .footer__wrap--unit h4 {
@@ -624,7 +642,9 @@ main .boost__wrap button:hover {
   }
 }
 .footer__wrap--links svg {
+  cursor: pointer;
   margin: 0 0.8rem;
+  transition: 0.3s ease-in-out;
 }
 .footer__wrap--links svg:hover path {
   transition: 0.2s ease-in-out;

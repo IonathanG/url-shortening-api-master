@@ -16,17 +16,22 @@ class newLink {
             if (response.ok) return response.json();
             throw new Error();
         })
-        .then(data => this.shortLink = data.result.short_link)
-        .then(() => display.displayNewLink(this.longLink, this.shortLink))
-        .catch(() => display.displayError('Link is not valid'));
+        .then(data => {
+            this.shortLink = data.result.short_link;
+            display.linkArray.push([this.longLink, this.shortLink]);
+        })
+        .then(() => display.displayNewLink())
+        .catch(() => display.displayError('Link is not valid or has been denied (disallowed link)'));
     }
 };
 
+
+//main function object
 const display = {
 
     newlink: undefined,
-    linkIndex: 0,
     errorStatus: false,
+    linkArray: [],
 
     //start all page events
     start: function() {
@@ -34,9 +39,15 @@ const display = {
         hamburger.addEventListener('click', () => this.mobile_Menu());
         shortBtn.addEventListener('click', (e) => this.shorten_It(e));
 
-        linkInput.addEventListener('input', (e) => {
+        linkInput.addEventListener('input', () => {
             if (this.errorStatus == true) this.clearError();
         });
+
+        //Find stored list if any
+        if (localStorage.linkArray) {
+            this.linkArray = JSON.parse(localStorage.linkArray);
+            this.displayNewLink();
+        }
     },
 
     //opens and closes the mobile menu
@@ -59,7 +70,6 @@ const display = {
     validURL: function(url) {
         //if input is empty
         if (url === "") {
-            console.log('empty');
             this.displayError('Please add a link');
             return false;
         }
@@ -111,21 +121,28 @@ const display = {
     },
 
     //display new link element
-    displayNewLink: function(long, short) {
-        document.querySelector('.result').innerHTML +=
-        `
-        <div class="result__wrap">
-            <a class="result__wrap--long" href="${long}" target="_blank">${long}</a>
-            <div class="result__wrap--split"></div>
-            <div class="result__wrap__container">
-                <a class="result__wrap__container--short" id="link_${this.linkIndex}" href="${short}" target="_blank">${short}</a>
-                <button class="copy" value="link_${this.linkIndex}">Copy</button>
+    displayNewLink: function() {
+        const result = document.querySelector('.result');
+        result.innerHTML = "";
+        
+        for (let i = 0; i < this.linkArray.length; i++) {
+            result.innerHTML +=
+            `
+            <div class="result__wrap">
+                <a class="result__wrap--long" href="${this.linkArray[i][0]}" target="_blank">${this.linkArray[i][0]}</a>
+                <div class="result__wrap--split"></div>
+                <div class="result__wrap__container">
+                    <a class="result__wrap__container--short" id="link_${i}" href="${this.linkArray[i][1]}" target="_blank">${this.linkArray[i][1]}</a>
+                    <button class="copy" value="link_${i}">Copy</button>
+                </div>
+                <svg class="result__wrap--removeIcon" id="remove_${i}" data-remove="${i}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.87 122.87"><title>remove</title><path d="M18,18A61.45,61.45,0,1,1,0,61.44,61.28,61.28,0,0,1,18,18ZM77.38,39l6.53,6.54a4,4,0,0,1,0,5.63L73.6,61.44,83.91,71.75a4,4,0,0,1,0,5.63l-6.53,6.53a4,4,0,0,1-5.63,0L61.44,73.6,51.13,83.91a4,4,0,0,1-5.63,0L39,77.38a4,4,0,0,1,0-5.63L49.28,61.44,39,51.13a4,4,0,0,1,0-5.63L45.5,39a4,4,0,0,1,5.63,0L61.44,49.28,71.75,39a4,4,0,0,1,5.63,0ZM61.44,10.54a50.91,50.91,0,1,0,36,14.91,50.83,50.83,0,0,0-36-14.91Z"/></svg>
             </div>
-        </div>
         `;
-
-        this.linkIndex++;
+        }
+    
+        this.store();
         this.copy_Btn();
+        this.remove();
     },
 
     //copy the new short link and change button display
@@ -146,6 +163,25 @@ const display = {
             //copy new link into clipboard
             const shortLink = document.getElementById(e.target.value);
             navigator.clipboard.writeText(shortLink.textContent);
+        }));
+    },
+
+    store: function() {
+        localStorage.linkArray = JSON.stringify(this.linkArray);
+    },
+
+    remove: function() {
+        const removeItem = document.querySelectorAll('.result__wrap--removeIcon');
+
+        removeItem.forEach(item => item.addEventListener('click', (e) => {
+                let newArr = [];
+            
+                for (let i = 0; i < this.linkArray.length; i++) {
+                    if (i !=  e.currentTarget.dataset.remove) newArr.push(this.linkArray[i]);
+                }
+
+            this.linkArray = newArr;
+            this.displayNewLink();
         }));
     }
 };
