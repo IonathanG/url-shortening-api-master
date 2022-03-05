@@ -25,11 +25,87 @@ class newLink {
     }
 };
 
-
-//main function object
-const display = {
+// utility functions
+const utils = {
 
     newlink: undefined,
+
+    //function to manage the click for API shorten-it
+    shorten_It: function(e) {
+        e.preventDefault();
+
+        if (this.validURL(linkInput.value)) {
+            this.newLink = new newLink(linkInput.value);
+            this.newLink.fetch_shortLink();
+            linkInput.value = "";
+        }
+    },
+
+    //check if url has valid format
+    validURL: function(url) {
+        //if input is empty
+        if (url === "") {
+            display.displayError('Please add a link');
+            return false;
+        }
+
+        //if input is the wrong format
+        else if (!url.match(/^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:[/?#]\S*)?$/i)) {
+            display.displayError('Please enter a valid format (ex: https://github.com/)');
+            return false;
+        }
+
+        else return true;
+    },
+
+    //store data in the local storage for future use
+    store: function() {
+        localStorage.linkArray = JSON.stringify(display.linkArray);
+    },
+
+    //remove link item displayed
+    remove: function() {
+        const removeItem = document.querySelectorAll('.result__wrap--removeIcon');
+
+        removeItem.forEach(item => item.addEventListener('click', (e) => {
+                let newArr = [];
+            
+                for (let i = 0; i < display.linkArray.length; i++) {
+                    if (i !=  e.currentTarget.dataset.remove) newArr.push(display.linkArray[i]);
+                }
+
+            display.linkArray = newArr;
+            display.displayNewLink();
+        }));
+    },
+
+    //copy the short link into the user's clipboard
+    copy_Btn: function() {
+        const copyBtn = document.querySelectorAll('.copy');
+        copyBtn.forEach(btn => btn.addEventListener('click', (e) => {
+
+            //reset all buttons
+            for (let i = 0; i < copyBtn.length; i++) {
+                copyBtn[i].classList.remove('copied');
+                copyBtn[i].textContent = 'Copy';
+            }
+
+            //update display of the button clicked on
+            e.target.classList.add('copied');
+            e.target.textContent = 'Copied!';
+
+            //copy new link into clipboard
+            const shortLink = document.getElementById(e.target.value);
+            navigator.clipboard.writeText(shortLink.textContent);
+        }));
+    }
+
+};
+
+
+//main function display
+const display = {
+
     errorStatus: false,
     linkArray: [],
 
@@ -37,7 +113,7 @@ const display = {
     start: function() {
         window.addEventListener('click', (e) => this.close_Menu(e));
         hamburger.addEventListener('click', () => this.mobile_Menu());
-        shortBtn.addEventListener('click', (e) => this.shorten_It(e));
+        shortBtn.addEventListener('click', (e) => utils.shorten_It(e));
 
         linkInput.addEventListener('input', () => {
             if (this.errorStatus == true) this.clearError();
@@ -66,23 +142,6 @@ const display = {
             }
     },
 
-    //check if url has valid format
-    validURL: function(url) {
-        //if input is empty
-        if (url === "") {
-            this.displayError('Please add a link');
-            return false;
-        }
-
-        //if input is the wrong format
-        else if (!url.match(/^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:[/?#]\S*)?$/i)) {
-            this.displayError('Please enter a valid format (ex: https://github.com/)');
-            return false;
-        }
-
-        else return true;
-    },
-
     //display typo error in the input field
     displayError: function(message) {
         this.errorStatus = true;
@@ -109,17 +168,6 @@ const display = {
         errorInput.classList.remove('errorInput');
     },
 
-    //function to manage the click for API shorten-it
-    shorten_It: function(e) {
-        e.preventDefault();
-
-        if (this.validURL(linkInput.value)) {
-            this.newLink = new newLink(linkInput.value);
-            this.newLink.fetch_shortLink();
-            linkInput.value = "";
-        }
-    },
-
     //display new link element
     displayNewLink: function() {
         const result = document.querySelector('.result');
@@ -135,55 +183,15 @@ const display = {
                     <a class="result__wrap__container--short" id="link_${i}" href="${this.linkArray[i][1]}" target="_blank">${this.linkArray[i][1]}</a>
                     <button class="copy" value="link_${i}">Copy</button>
                 </div>
-                <svg class="result__wrap--removeIcon" id="remove_${i}" data-remove="${i}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.87 122.87"><title>remove</title><path d="M18,18A61.45,61.45,0,1,1,0,61.44,61.28,61.28,0,0,1,18,18ZM77.38,39l6.53,6.54a4,4,0,0,1,0,5.63L73.6,61.44,83.91,71.75a4,4,0,0,1,0,5.63l-6.53,6.53a4,4,0,0,1-5.63,0L61.44,73.6,51.13,83.91a4,4,0,0,1-5.63,0L39,77.38a4,4,0,0,1,0-5.63L49.28,61.44,39,51.13a4,4,0,0,1,0-5.63L45.5,39a4,4,0,0,1,5.63,0L61.44,49.28,71.75,39a4,4,0,0,1,5.63,0ZM61.44,10.54a50.91,50.91,0,1,0,36,14.91,50.83,50.83,0,0,0-36-14.91Z"/></svg>
+                <svg class="result__wrap--removeIcon" data-remove="${i}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.87 122.87"><title>remove</title><path d="M18,18A61.45,61.45,0,1,1,0,61.44,61.28,61.28,0,0,1,18,18ZM77.38,39l6.53,6.54a4,4,0,0,1,0,5.63L73.6,61.44,83.91,71.75a4,4,0,0,1,0,5.63l-6.53,6.53a4,4,0,0,1-5.63,0L61.44,73.6,51.13,83.91a4,4,0,0,1-5.63,0L39,77.38a4,4,0,0,1,0-5.63L49.28,61.44,39,51.13a4,4,0,0,1,0-5.63L45.5,39a4,4,0,0,1,5.63,0L61.44,49.28,71.75,39a4,4,0,0,1,5.63,0ZM61.44,10.54a50.91,50.91,0,1,0,36,14.91,50.83,50.83,0,0,0-36-14.91Z"/></svg>
             </div>
         `;
         }
     
-        this.store();
-        this.copy_Btn();
-        this.remove();
+        utils.store();
+        utils.copy_Btn();
+        utils.remove();
     },
-
-    //copy the new short link and change button display
-    copy_Btn: function() {
-        const copyBtn = document.querySelectorAll('.copy');
-        copyBtn.forEach(btn => btn.addEventListener('click', (e) => {
-
-            //reset all buttons
-            for (let i = 0; i < copyBtn.length; i++) {
-                copyBtn[i].classList.remove('copied');
-                copyBtn[i].textContent = 'Copy';
-            }
-
-            //update display of the button clicked on
-            e.target.classList.add('copied');
-            e.target.textContent = 'Copied!';
-
-            //copy new link into clipboard
-            const shortLink = document.getElementById(e.target.value);
-            navigator.clipboard.writeText(shortLink.textContent);
-        }));
-    },
-
-    store: function() {
-        localStorage.linkArray = JSON.stringify(this.linkArray);
-    },
-
-    remove: function() {
-        const removeItem = document.querySelectorAll('.result__wrap--removeIcon');
-
-        removeItem.forEach(item => item.addEventListener('click', (e) => {
-                let newArr = [];
-            
-                for (let i = 0; i < this.linkArray.length; i++) {
-                    if (i !=  e.currentTarget.dataset.remove) newArr.push(this.linkArray[i]);
-                }
-
-            this.linkArray = newArr;
-            this.displayNewLink();
-        }));
-    }
 };
 
 display.start();
