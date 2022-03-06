@@ -163,9 +163,9 @@ body li {
 main {
   margin-top: 6em;
 }
-@media (max-width: 1120px) {
+@media (max-width: 1350px) {
   main {
-    margin-top: 2em;
+    margin-top: 1rem;
   }
 }
 main .introduction {
@@ -176,6 +176,12 @@ main .introduction {
   main .introduction {
     display: flex;
     flex-direction: column;
+    gap: 2rem;
+  }
+}
+@media (max-width: 920px) {
+  main .introduction {
+    overflow-x: hidden;
   }
 }
 main .introduction__img {
@@ -187,6 +193,7 @@ main .introduction__img {
 }
 @media (max-width: 1350px) {
   main .introduction__img {
+    top: 0px;
     position: relative;
   }
 }
@@ -209,7 +216,12 @@ main .introduction__wrap--text h1 {
 }
 @media (max-width: 1120px) {
   main .introduction__wrap--text h1 {
-    font-size: 3.5em;
+    font-size: 3.4em;
+  }
+}
+@media (max-width: 920px) {
+  main .introduction__wrap--text h1 {
+    font-size: 2.8em;
   }
 }
 main .introduction__wrap--text p {
@@ -262,7 +274,7 @@ main .shorten {
 @media (max-width: 1350px) {
   main .shorten {
     margin-top: 0;
-    padding: 5rem 0;
+    padding: 2rem 0;
   }
 }
 main .shorten__wrap {
@@ -352,6 +364,7 @@ main .result__wrap {
 }
 main .result__wrap--long {
   color: black;
+  overflow: hidden;
 }
 main .result__wrap--split {
   display: none;
@@ -563,10 +576,16 @@ main .boost {
 main .boost__wrap {
   flex-direction: column;
   gap: 2rem;
+  text-align: center;
 }
 main .boost__wrap h2 {
   color: white;
   font-size: 2.5rem;
+}
+@media (max-width: 1120px) {
+  main .boost__wrap h2 {
+    font-size: 2rem;
+  }
 }
 main .boost__wrap button {
   font-weight: 700;

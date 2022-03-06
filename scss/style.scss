@@ -164,8 +164,8 @@ body {
 main {
     margin-top: 6em;
 
-    @media (max-width: 1120px) {
-        margin-top: 2em;
+    @media (max-width: 1350px) {
+        margin-top: 1rem;
     }
 
     //*****FIRST SECTION*****
@@ -176,6 +176,11 @@ main {
         @media (max-width: 1350px) {
             display: flex;
             flex-direction: column;
+            gap: 2rem;
+        }
+
+        @media (max-width: 920px) {
+            overflow-x: hidden;
         }
 
         &__img {
@@ -186,6 +191,7 @@ main {
             margin: 0 auto;
 
             @media (max-width: 1350px) {
+                top: 0px;
                 position: relative;
             }
         }
@@ -210,7 +216,11 @@ main {
                     font-weight: $big_weight;
 
                     @media (max-width: 1120px) {
-                        font-size: 3.5em;
+                        font-size: 3.4em;
+                    }
+
+                    @media (max-width: 920px) {
+                        font-size: 2.8em;
                     }
                 }
                 
@@ -248,7 +258,6 @@ main {
         }
     }
 
-
     //*****SECOND SECTION*****
     .shorten {
         margin-top: 5rem;
@@ -258,7 +267,7 @@ main {
 
         @media (max-width: 1350px) {
             margin-top: 0;
-            padding: 5rem 0;
+            padding: 2rem 0;
         }
         
         &__wrap{
@@ -359,6 +368,7 @@ main {
 
             &--long {
                 color: black;
+                overflow: hidden;
             }
 
             &--split {
@@ -598,10 +608,15 @@ main {
             @extend %flex-center;
             flex-direction: column;
             gap: 2rem;
+            text-align: center;
             
             h2 {
                 color: white;
                 font-size: 2.5rem;
+
+                @media (max-width: 1120px) {
+                    font-size: 2rem;
+                }
             }
 
             button {

@@ -2,6 +2,7 @@ const navItem = document.querySelector('.nav');
 const hamburger = document.querySelector('.hamburger');
 const shortBtn = document.getElementById('shorten-it');
 const linkInput = document.getElementById('linkInput');
+const body = document.querySelector('body');
 
 // class to fetch a new link
 class newLink {
@@ -111,7 +112,8 @@ const display = {
 
     //start all page events
     start: function() {
-        window.addEventListener('click', (e) => this.close_Menu(e));
+        // window.addEventListener('click', (e) => this.close_Menu(e));
+        body.addEventListener('click', (e) => this.close_Menu(e));
         hamburger.addEventListener('click', () => this.mobile_Menu());
         shortBtn.addEventListener('click', (e) => utils.shorten_It(e));
 
